@@ -31,45 +31,51 @@ namespace OOP_sem2_week3_Q3
                     }
                 
                 int optionIndex = rnd.Next(10);
-                
+                String output = "";
                 String hidenWord = option[optionIndex];
                 //Console.WriteLine(hidenWord);
                
                 //change dictionary with an array in the same order
-                Dictionary<char, bool> hidenLetters = new Dictionary<char, bool>();
-                
-                foreach(char letter in hidenWord)
+                Dictionary<char, bool> hidenLettersDictionary = new Dictionary<char, bool>();
+
+                foreach (char letter in hidenWord)
                 {
-                    hidenLetters.Add(letter, false);
+                    if (!hidenLettersDictionary.ContainsKey(letter))
+                    {
+                        hidenLettersDictionary.Add(letter, false);
+                    }
+                    
                 }
            
                 
                 do
                 {
                     Console.WriteLine("The hiden word is: ");
+                    
                     foreach (char letter in hidenWord)
                     {
-                        if (hidenLetters[letter])
+                        if (hidenLettersDictionary[letter])
                         {
-                            Console.Write(letter);
+                            output += letter;
                         }else
                         {
-                            Console.Write("-");
-                            letterFlag = false;
+                            output += "-";
                         }
                     }
+                    Console.WriteLine(output);
                     Console.WriteLine("");
                     Console.WriteLine("Input a leter of the hiden word");
                     char userLetter = char.ToLower((Console.ReadLine().ToCharArray()[0]));
-                    foreach(char letter in hidenWord)
+                    if (hidenWord.Contains(userLetter))
                     {
-                        if (letter.Equals(userLetter))
-                        {
-                            hidenLetters[letter] = true;
-                        }
+                        hidenLettersDictionary[userLetter] = true;
                     }
-
+                    if (!output.Contains("-"))
+                    {
+                        letterFlag = false;
+                    }
                 } while (letterFlag);
+                Console.WriteLine("Congrats!!!");
             } while (end);
             
 
