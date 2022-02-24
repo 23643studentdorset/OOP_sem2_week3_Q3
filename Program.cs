@@ -33,9 +33,9 @@ namespace OOP_sem2_week3_Q3
                 int optionIndex = rnd.Next(10);
                 String output = "";
                 String hidenWord = option[optionIndex];
-                //Console.WriteLine(hidenWord);
+                Console.WriteLine(hidenWord);
                
-                //change dictionary with an array in the same order
+              
                 Dictionary<char, bool> hidenLettersDictionary = new Dictionary<char, bool>();
 
                 foreach (char letter in hidenWord)
@@ -51,7 +51,10 @@ namespace OOP_sem2_week3_Q3
                 do
                 {
                     Console.WriteLine("The hiden word is: ");
-                    
+
+                    output = "";
+
+                    //Console.WriteLine(hidenWord);
                     foreach (char letter in hidenWord)
                     {
                         if (hidenLettersDictionary[letter])
@@ -62,7 +65,15 @@ namespace OOP_sem2_week3_Q3
                             output += "-";
                         }
                     }
+                    
+                
+
                     Console.WriteLine(output);
+                    if (!output.Contains("-"))
+                    {
+                        Console.WriteLine("Congrats!!!");
+                        return;
+                    }
                     Console.WriteLine("");
                     Console.WriteLine("Input a leter of the hiden word");
                     char userLetter = char.ToLower((Console.ReadLine().ToCharArray()[0]));
@@ -70,12 +81,9 @@ namespace OOP_sem2_week3_Q3
                     {
                         hidenLettersDictionary[userLetter] = true;
                     }
-                    if (!output.Contains("-"))
-                    {
-                        letterFlag = false;
-                    }
+                    
                 } while (letterFlag);
-                Console.WriteLine("Congrats!!!");
+                
             } while (end);
             
 
