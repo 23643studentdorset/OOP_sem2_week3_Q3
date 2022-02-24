@@ -5,6 +5,18 @@ namespace OOP_sem2_week3_Q3
 {
     class Program
     {
+        //using static System.ConsoleColor;
+
+        //var buffer = new ConsoleBuffer(width: 6);
+        //buffer.DrawHorizontalLine(x: 0, y: 0, width: 6, color: White);
+        //buffer.DrawHorizontalLine(x: 0, y: 2, width: 6, color: White);
+        //buffer.DrawVerticalLine(x: 0, y: 0, height: 3, color: White);
+        //buffer.DrawVerticalLine(x: 5, y: 0, height: 3, color: White);
+        //buffer.DrawString(x: 1, y: 1, color: White, text: "1337");
+        //new ConsoleRenderTarget().Render(buffer);
+         
+
+
         static void Main(string[] args)
         {
             /*Create a game like Hangman in which a player guesses letters to try to replicate a hidden word. 
@@ -17,13 +29,13 @@ namespace OOP_sem2_week3_Q3
             String[] option = { "incompossible", "fungible", "xenodiagnosis", "cang", "demulcent", "univocalic", "demiurge", "algor", "jejune", "vendible" };
             String[] meaning = { "not mutually possible", "interchangeable", "diagnosis of disease by allowing laboratory-bred diseases to affect material",
                 "wooden yoke hung around a criminal's neck", "emulsifier; something soothing", "having only one vowel", "creative spirit or entity", "coldness", "lacking interest or significance", "capable of being sold"};
-            bool end = false;
+            bool end = true;
             bool letterFlag = true;
             Random rnd = new Random();
            
             do
             {
-                Console.WriteLine("Would you like to play? Y or N");
+                Console.WriteLine("Would you like to play hangman? Y or N");
                 string userInput = Console.ReadLine();
                 if (userInput.Equals("N"))
                     {
@@ -34,7 +46,7 @@ namespace OOP_sem2_week3_Q3
                 String output = "";
                 String hidenWord = option[optionIndex];
                 Console.WriteLine(hidenWord);
-               
+                int life = 5;
               
                 Dictionary<char, bool> hidenLettersDictionary = new Dictionary<char, bool>();
 
@@ -81,7 +93,16 @@ namespace OOP_sem2_week3_Q3
                     {
                         hidenLettersDictionary[userLetter] = true;
                     }
-                    
+                    else
+                    {
+                        life--;
+                    }
+                    if (life == 0)
+                    {
+                        Console.WriteLine("Sorry, you lost, the word was {0}", hidenWord);
+                        letterFlag = false;
+                    }
+
                 } while (letterFlag);
                 
             } while (end);
